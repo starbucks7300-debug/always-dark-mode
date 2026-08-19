@@ -240,18 +240,7 @@ export function Testimonials() {
                       src={visual.lottie}
                       eager={i === 0}
                       className="w-full h-full scale-110"
-                      fallback={
-                        <img
-                          src={visual.still}
-                          alt=""
-                          width={640}
-                          height={800}
-                          draggable={false}
-                          loading={i === 0 ? "eager" : "lazy"}
-                          decoding="async"
-                          className="size-full object-contain"
-                        />
-                      }
+                      fallback={<div className="size-full rounded-2xl bg-foreground/5" />}
                     />
                   </motion.div>
                 );
