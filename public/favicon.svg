@@ -1,13 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#D8A54D;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#8B6F47;stop-opacity:1" />
-    </linearGradient>
-  </defs>
-  <rect width="100" height="100" fill="#1a1a1a"/>
-  <path d="M 20 80 L 40 40 L 60 60 L 80 30" stroke="url(#grad)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="40" cy="40" r="3" fill="#D8A54D"/>
-  <circle cx="60" cy="60" r="3" fill="#D8A54D"/>
-  <circle cx="80" cy="30" r="3" fill="#D8A54D"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="MS Marketplace">
+  <rect width="64" height="64" rx="14" fill="#FF4B35"/>
+  <g fill="none" stroke="#FFD000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 46V20l10 14 10-14v26"/>
+  </g>
+  <path d="M52 24c-2.6-2.6-11-3.4-11 2.4 0 5.4 11 3.6 11 9.6 0 6-8.6 5.6-11.4 2.8"
+        fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
 </svg>
