@@ -16,14 +16,10 @@ import {
   Languages,
 } from "lucide-react";
 
-import cred1 from "@/assets/cred-1.avif";
-import cred2 from "@/assets/cred-2.avif";
-import cred3 from "@/assets/cred-3.avif";
-
 const SLIDE_VISUALS = [
-  { lottie: "/lottie/cred-education.lottie", still: cred1 },
-  { lottie: "/lottie/cred-certification.lottie", still: cred2 },
-  { lottie: "/lottie/cred-award.lottie", still: cred3 },
+  { lottie: "/lottie/cred-education.lottie" },
+  { lottie: "/lottie/cred-certification.lottie" },
+  { lottie: "/lottie/cred-award.lottie" },
 ] as const;
 const ICONS = [Award, Compass, ShieldCheck, Rocket, Database, Container, Languages];
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -244,18 +240,7 @@ export function Testimonials() {
                       src={visual.lottie}
                       eager={i === 0}
                       className="w-full h-full scale-110"
-                      fallback={
-                        <img
-                          src={visual.still}
-                          alt=""
-                          width={640}
-                          height={800}
-                          draggable={false}
-                          loading={i === 0 ? "eager" : "lazy"}
-                          decoding="async"
-                          className="size-full object-contain"
-                        />
-                      }
+                      fallback={<div className="size-full rounded-2xl bg-foreground/5" />}
                     />
                   </motion.div>
                 );
