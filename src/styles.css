@@ -386,10 +386,11 @@
   --shadow-glow: 0 16px 36px rgba(0, 0, 0, 0.08);
   --shadow-lift: 0 20px 40px rgba(0, 0, 0, 0.12);
 
-  /* Scrollbar (light mode) — stronger contrast so the thumb is visible on pale backgrounds */
-  --scrollbar-track: rgba(0, 0, 0, 0.12);
-  --scrollbar-thumb: rgba(0, 0, 0, 0.35);
-  --scrollbar-thumb-hover: #FF4B35;
+  /* Scrollbar (light mode) — solid brand thumb stays visible before hover */
+  --scrollbar-size: 12px;
+  --scrollbar-track: #DEDAD0;
+  --scrollbar-thumb: #FF4B35;
+  --scrollbar-thumb-hover: #D93623;
 }
 
 @layer base {
