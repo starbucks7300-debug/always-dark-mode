@@ -14,6 +14,7 @@ import { ThemeProvider, themeBootstrapScript } from "@/lib/theme";
 import { I18nProvider, langBootstrapScript, useI18n } from "@/lib/i18n";
 import { useSmoothScroll } from "@/lib/smooth-scroll";
 import { PageSkeleton } from "@/components/ui/Skeletons";
+import { AppPreloader, preloaderBootstrapScript } from "@/components/ui/AppPreloader";
 
 // Client-only chrome and the rarely-hit 404 screen are pulled out of the
 // initial bundle so the first route paints with the smallest possible JS.
@@ -150,6 +151,7 @@ function RootShell({ children }: { children: ReactNode }) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
         <script dangerouslySetInnerHTML={{ __html: langBootstrapScript }} />
+        <script dangerouslySetInnerHTML={{ __html: preloaderBootstrapScript }} />
         <HeadContent />
       </head>
       <body suppressHydrationWarning>
@@ -172,6 +174,7 @@ function RootComponent() {
       <ThemeProvider>
         <I18nProvider>
           <ArabicFonts />
+          <AppPreloader />
           {hydrated && (
             <Suspense fallback={null}>
               <Toaster position="bottom-right" richColors />
