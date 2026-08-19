@@ -595,3 +595,124 @@ html.theme-transition-reverse::view-transition-new(root) {
 @media (prefers-reduced-motion: reduce) {
   .pen-writing { animation: none; }
 }
+
+/* ---------------------------------------------------------------------------
+ * First-load splash (AppPreloader)
+ * SSR-rendered so it is part of the first paint. The bootstrap script sets
+ * html[data-preloaded] for repeat visits / reduced motion, which removes it
+ * before it can paint.
+ * ------------------------------------------------------------------------ */
+:root[data-preloaded] .app-preloader {
+  display: none !important;
+}
+
+:root[data-preloading] body {
+  overflow: hidden;
+}
+
+.app-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: var(--background);
+  opacity: 1;
+  transition: opacity 520ms ease, visibility 520ms ease;
+}
+
+.app-preloader::after {
+  content: "";
+  position: absolute;
+  inset: -20% 30% 40% -10%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 30% 30%,
+    color-mix(in oklab, var(--accent) 22%, transparent),
+    transparent 65%
+  );
+  filter: blur(60px);
+}
+
+.app-preloader[data-leaving] {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.app-preloader__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.375rem;
+}
+
+.app-preloader__art {
+  width: clamp(7rem, 26vw, 11rem);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  animation: preloader-rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.app-preloader__mark {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--accent);
+}
+
+.app-preloader__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+  animation: preloader-rise 700ms 90ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.app-preloader__role {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+  animation: preloader-rise 700ms 160ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.app-preloader__bar {
+  margin-top: 1.25rem;
+  width: clamp(9rem, 40vw, 15rem);
+  height: 3px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: color-mix(in oklab, var(--foreground) 12%, transparent);
+}
+
+.app-preloader__bar > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width 220ms ease-out;
+}
+
+@keyframes preloader-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-preloader {
+    display: none !important;
+  }
+}
