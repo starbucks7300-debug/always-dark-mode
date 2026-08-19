@@ -559,6 +559,24 @@
   mix-blend-mode: normal;
 }
 
+/* While the snapshot animates, freeze everything else that would otherwise
+   compete for the compositor: looping animations, scroll-driven effects and
+   costly blurs. This is what makes the reveal feel instant instead of laggy. */
+html.theme-transitioning * {
+  transition: none !important;
+  animation-play-state: paused !important;
+}
+
+html.theme-transitioning {
+  /* No hover/scroll work mid-transition, and no scrollbar reflow jitter. */
+  pointer-events: none;
+}
+
+html.theme-transitioning :where([class*="backdrop-blur"]) {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
 /* Outgoing theme stays put; incoming theme is clipped open from the toggle */
 ::view-transition-old(root) {
   z-index: 1;
