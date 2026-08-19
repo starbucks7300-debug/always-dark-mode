@@ -212,8 +212,8 @@ export function Testimonials() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Row 2, col 9-12: Lottie visual */}
-          <div className="lg:col-start-9 lg:col-span-4 lg:row-start-2 lg:self-start relative w-full overflow-hidden rounded-2xl border border-border bg-foreground/5 [contain:paint]">
+          {/* Row 2, col 1-4: Lottie visual */}
+          <div className="lg:col-start-1 lg:col-span-4 lg:row-start-2 lg:self-start relative w-full overflow-hidden rounded-2xl border border-border bg-foreground/5 [contain:paint]">
             <div className="relative aspect-[4/5] lg:aspect-[5/4] w-full">
               {SLIDE_VISUALS.map((visual, i) => {
                 const isActive = i === activeIdx % SLIDE_VISUALS.length;
@@ -263,8 +263,8 @@ export function Testimonials() {
             </div>
           </div>
 
-          {/* Row 3, col 9-12: Controls */}
-          <div className="lg:col-start-9 lg:col-span-4 lg:row-start-3 flex items-center gap-3">
+          {/* Row 3, col 1-4: Controls */}
+          <div className="lg:col-start-1 lg:col-span-4 lg:row-start-3 flex items-center gap-3">
             <motion.button
               onClick={prev}
               whileTap={reduce ? {} : { scale: 0.9 }}
