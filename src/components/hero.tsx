@@ -94,29 +94,8 @@ export function Hero() {
                   microservices and modern frontend frameworks.
                 </motion.p>
 
-                <motion.div
-                  className="mt-7 flex flex-wrap items-center gap-3"
-                  variants={fadeUp(0.42)}
-                  initial="hidden"
-                  animate="show"
-                >
-                  <Magnetic strength={10}>
-                    <a
-                      href="#work"
-                      className="press sheen inline-flex items-center rounded-full bg-background px-5 py-2.5 text-sm font-semibold text-foreground"
-                    >
-                      View projects
-                    </a>
-                  </Magnetic>
-                  <Magnetic strength={10}>
-                    <a
-                      href="#contact"
-                      className="press inline-flex items-center rounded-full bg-background/10 px-5 py-2.5 text-sm font-semibold text-background backdrop-blur-sm transition-colors hover:bg-background/20"
-                    >
-                      Get in touch
-                    </a>
-                  </Magnetic>
-                </motion.div>
+
+
 
                 <motion.dl
                   className="mt-9 grid grid-cols-2 gap-6 sm:grid-cols-4"
