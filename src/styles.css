@@ -98,8 +98,17 @@
   --background: var(--surface);
   --foreground: var(--ink);
   /* Hero showcase card: always a deep ink surface with light type. */
-  --hero-card: oklch(0.28 0.05 265);
+  --hero-card: oklch(0.26 0.045 265);
   --hero-card-foreground: oklch(0.985 0.004 95);
+  --hero-card-gradient: linear-gradient(
+    155deg,
+    oklch(0.32 0.055 268) 0%,
+    oklch(0.25 0.045 265) 48%,
+    oklch(0.21 0.04 262) 100%
+  );
+  --hero-card-edge: oklch(1 0 0 / 0.1);
+  --hero-card-sheen: oklch(1 0 0 / 0.09);
+  --hero-card-shadow: 0 34px 70px -34px oklch(0.28 0.05 265 / 0.55);
   --card: oklch(1 0 0);
   --card-foreground: var(--ink);
   --popover: oklch(1 0 0);
@@ -311,6 +320,41 @@
   background-image: radial-gradient(var(--dot-ink) 1.4px, transparent 1.4px);
   background-size: 22px 22px;
   background-position: 0 0;
+}
+
+/* Hero showcase surface: a deep ink slab that keeps identical hierarchy in
+   both themes — only the depth cues (gradient, edge, shadow) are re-tuned. */
+@utility hero-surface {
+  position: relative;
+  background-color: var(--hero-card);
+  background-image: var(--hero-card-gradient);
+  color: var(--hero-card-foreground);
+  border: 1px solid var(--hero-card-edge);
+  box-shadow: var(--hero-card-shadow);
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      to bottom,
+      var(--hero-card-sheen),
+      transparent 42%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 2;
+  }
 }
 
 @utility slide-card {
@@ -843,8 +887,17 @@
 
   --background: var(--surface);
   --foreground: var(--ink);
-  --hero-card: oklch(0.235 0.025 265);
+  --hero-card: oklch(0.245 0.028 265);
   --hero-card-foreground: oklch(0.96 0.01 95);
+  --hero-card-gradient: linear-gradient(
+    155deg,
+    oklch(0.295 0.032 268) 0%,
+    oklch(0.24 0.028 265) 52%,
+    oklch(0.205 0.024 262) 100%
+  );
+  --hero-card-edge: oklch(1 0 0 / 0.08);
+  --hero-card-sheen: oklch(1 0 0 / 0.06);
+  --hero-card-shadow: 0 34px 70px -34px oklch(0.08 0.02 265 / 0.75);
   --card: oklch(0.235 0.025 265);
   --card-foreground: var(--ink);
   --popover: oklch(0.235 0.025 265);
