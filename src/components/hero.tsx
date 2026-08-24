@@ -52,7 +52,7 @@ export function Hero() {
             hero image paints on the very first frame instead of waiting for
             hydration behind an opacity-0 motion variant. */}
         <div className="hero-rise relative mt-8 transform-gpu sm:mt-10">
-          <div className="slide-card relative overflow-hidden rounded-[2rem] bg-hero-card p-6 sm:rounded-[2.5rem] sm:p-10 lg:p-14">
+          <div className="hero-surface relative overflow-hidden rounded-[2rem] p-6 sm:rounded-[2.5rem] sm:p-10 lg:p-14">
             {/* Soft drifting colour blobs behind the content */}
             <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
               <span className="float-slow absolute -top-24 -left-16 size-72 rounded-full bg-brand-orange/25 blur-3xl" />
