@@ -52,7 +52,7 @@ export function Hero() {
             hero image paints on the very first frame instead of waiting for
             hydration behind an opacity-0 motion variant. */}
         <div className="hero-rise relative mt-8 transform-gpu sm:mt-10">
-          <div className="slide-card relative overflow-hidden rounded-[2rem] bg-foreground p-6 sm:rounded-[2.5rem] sm:p-10 lg:p-14">
+          <div className="slide-card relative overflow-hidden rounded-[2rem] bg-hero-card p-6 sm:rounded-[2.5rem] sm:p-10 lg:p-14">
             {/* Soft drifting colour blobs behind the content */}
             <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
               <span className="float-slow absolute -top-24 -left-16 size-72 rounded-full bg-brand-orange/25 blur-3xl" />
@@ -62,7 +62,7 @@ export function Hero() {
             <div className="relative grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
               <div>
                 <motion.span
-                  className="inline-flex items-center gap-2 rounded-full bg-background/10 px-3 py-1.5 text-[0.62rem] font-semibold tracking-[0.18em] text-background/80 uppercase backdrop-blur-sm sm:text-xs"
+                  className="inline-flex items-center gap-2 rounded-full bg-hero-card-foreground/10 px-3 py-1.5 text-[0.62rem] font-semibold tracking-[0.18em] text-hero-card-foreground/80 uppercase backdrop-blur-sm sm:text-xs"
                   variants={fadeUp(0.1, 10)}
                   initial="hidden"
                   animate="show"
@@ -72,7 +72,7 @@ export function Hero() {
                 </motion.span>
 
                 <motion.h2
-                  className="mt-5 font-display text-4xl leading-[0.92] font-extrabold tracking-[-0.04em] text-background sm:text-6xl"
+                  className="mt-5 font-display text-4xl leading-[0.92] font-extrabold tracking-[-0.04em] text-hero-card-foreground sm:text-6xl"
                   variants={fadeUp(0.2, 22)}
                   initial="hidden"
                   animate="show"
@@ -84,7 +84,7 @@ export function Hero() {
                 </motion.h2>
 
                 <motion.p
-                  className="mt-5 max-w-lg text-sm leading-relaxed text-background/70 sm:text-base"
+                  className="mt-5 max-w-lg text-sm leading-relaxed text-hero-card-foreground/70 sm:text-base"
                   variants={fadeUp(0.32)}
                   initial="hidden"
                   animate="show"
@@ -109,9 +109,9 @@ export function Hero() {
                       <dd>
                         <CountUp
                           value={stat.value}
-                          className="block font-display text-2xl font-extrabold tracking-[-0.03em] text-background sm:text-3xl"
+                          className="block font-display text-2xl font-extrabold tracking-[-0.03em] text-hero-card-foreground sm:text-3xl"
                         />
-                        <span className="mt-1 block text-[0.62rem] font-semibold tracking-[0.12em] text-background/55 uppercase">
+                        <span className="mt-1 block text-[0.62rem] font-semibold tracking-[0.12em] text-hero-card-foreground/55 uppercase">
                           {stat.label}
                         </span>
                       </dd>
@@ -136,7 +136,7 @@ export function Hero() {
                     />
                   </div>
                 </Parallax>
-                <p className="mt-4 text-center text-xs font-semibold tracking-wide text-background/80 sm:text-sm">
+                <p className="mt-4 text-center text-xs font-semibold tracking-wide text-hero-card-foreground/80 sm:text-sm">
                   EHR · FHIR · Telehealth · Cloud
                 </p>
               </div>
