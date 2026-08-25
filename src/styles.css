@@ -5,36 +5,39 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system definition.
+ * Design system definition (Tailwind v4, CSS-first).
  *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * - @theme inline maps CSS custom properties to utilities
+ *   (--color-chompo-red -> bg-chompo-red, --animate-ticker -> animate-ticker).
+ * - :root / .dark hold the actual values, so every token is mode-aware.
+ * - All colors use oklch.
  */
 
 @theme inline {
+  /* Typography */
   --font-display: "Anton", "Archivo Black", sans-serif;
+  --font-anton: "Anton", sans-serif;
+  --font-bebas: "Bebas Neue", sans-serif;
+  --font-oswald: "Oswald", "Barlow Condensed", sans-serif;
   --font-heavy: "Archivo Black", sans-serif;
   --font-slab: "Baloo 2", system-ui, sans-serif;
   --font-body: "Barlow Condensed", sans-serif;
-  --font-oswald: "Oswald", "Barlow Condensed", sans-serif;
+
+  /* Brand palette (mode-aware, values in :root / .dark) */
   --color-cream: var(--cream);
   --color-ink: var(--ink);
   --color-signal: var(--signal);
   --color-signal-dark: var(--signal-dark);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
+  --color-chompo-red: var(--chompo-red);
+  --color-chompo-red-light: var(--chompo-red-light);
+  --color-chompo-black: var(--chompo-black);
+  --color-chompo-cream: var(--chompo-cream);
+  --color-chompo-cream-dark: var(--chompo-cream-dark);
+  --color-chompo-brown: var(--chompo-brown);
+  --color-chompo-brown-light: var(--chompo-brown-light);
+  --color-chompo-brown-mid: var(--chompo-brown-mid);
+
+  /* Semantic palette */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -42,8 +45,12 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
+  --color-secondary-light: var(--secondary-light);
+  --color-secondary-dark: var(--secondary-dark);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
@@ -68,14 +75,46 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Radii */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  /* Motion */
+  --animate-ticker: ticker 20s linear infinite;
+  --animate-ticker-slow: ticker 30s linear infinite;
+  --animate-ticker-reverse: ticker-reverse 22s linear infinite;
+  --animate-spin-slow: spin 24s linear infinite;
+  --animate-spin-reverse: spin-reverse 24s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 11s ease-in-out infinite alternate-reverse;
+  --animate-nudge-left: nudge-left 1.4s ease-in-out infinite;
+  --animate-blink: blink 1.1s steps(1, end) infinite;
 }
 
 :root {
   --radius: 0.625rem;
+
+  /* Brand */
+  --chompo-red: oklch(0.465 0.189 28.9);
+  --chompo-red-light: oklch(0.578 0.18 26.2);
+  --chompo-black: oklch(0.159 0 90);
+  --chompo-cream: oklch(0.96 0.048 94.3);
+  --chompo-cream-dark: oklch(0.934 0.066 97.1);
+  --chompo-brown: oklch(0.427 0.025 29.2);
+  --chompo-brown-light: oklch(0.755 0.025 59.3);
+  --chompo-brown-mid: oklch(0.653 0.048 42.9);
+
   --cream: oklch(0.968 0.033 96.5);
   --ink: oklch(0.198 0 0);
   --signal: oklch(0.552 0.222 27.2);
   --signal-dark: oklch(0.463 0.191 27.2);
+
   --background: var(--cream);
   --foreground: var(--ink);
   --card: var(--cream);
@@ -83,8 +122,12 @@
   --popover: var(--cream);
   --popover-foreground: var(--ink);
   --primary: var(--signal);
+  --primary-light: oklch(0.711 0.156 251);
+  --primary-dark: var(--signal-dark);
   --primary-foreground: var(--cream);
   --secondary: var(--ink);
+  --secondary-light: oklch(0.982 0.002 247.8);
+  --secondary-dark: oklch(0.911 0.007 247.9);
   --secondary-foreground: var(--cream);
   --muted: oklch(0.93 0.03 96.5);
   --muted-foreground: oklch(0.44 0.02 60);
@@ -112,10 +155,20 @@
 
 .dark {
   /* Brand tokens flip so every cream/ink surface in the app inverts too. */
+  --chompo-red: oklch(0.6 0.203 28.9);
+  --chompo-red-light: oklch(0.68 0.17 26.2);
+  --chompo-black: oklch(0.13 0 90);
+  --chompo-cream: oklch(0.945 0.04 94.3);
+  --chompo-cream-dark: oklch(0.9 0.055 97.1);
+  --chompo-brown: oklch(0.72 0.03 29.2);
+  --chompo-brown-light: oklch(0.5 0.02 59.3);
+  --chompo-brown-mid: oklch(0.58 0.045 42.9);
+
   --cream: oklch(0.19 0.014 70);
   --ink: oklch(0.955 0.021 96.5);
   --signal: oklch(0.63 0.213 27.2);
   --signal-dark: oklch(0.52 0.198 27.2);
+
   --background: var(--cream);
   --foreground: var(--ink);
   --card: oklch(0.24 0.016 70);
@@ -123,8 +176,12 @@
   --popover: oklch(0.24 0.016 70);
   --popover-foreground: var(--ink);
   --primary: var(--signal);
+  --primary-light: oklch(0.74 0.14 251);
+  --primary-dark: var(--signal-dark);
   --primary-foreground: var(--ink);
   --secondary: var(--ink);
+  --secondary-light: oklch(0.3 0.014 70);
+  --secondary-dark: oklch(0.26 0.014 70);
   --secondary-foreground: var(--cream);
   --muted: oklch(0.26 0.014 70);
   --muted-foreground: oklch(0.76 0.02 80);
@@ -150,6 +207,91 @@
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
 
+/* ---------------- Keyframes (single source of truth) ---------------- */
+
+@keyframes ticker {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes ticker-reverse {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(6px, -10px, 0);
+  }
+}
+
+@keyframes nudge-left {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+}
+
+@keyframes blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes theme-reveal {
+  from {
+    clip-path: circle(0% at var(--theme-x, 50%) var(--theme-y, 50%));
+  }
+  to {
+    clip-path: circle(var(--theme-r, 150%) at var(--theme-x, 50%) var(--theme-y, 50%));
+  }
+}
+
+@keyframes toggle-ripple {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.85;
+  }
+  70% {
+    opacity: 0.25;
+  }
+  100% {
+    transform: scale(2.1);
+    opacity: 0;
+  }
+}
+
+/* ---------------- Base ---------------- */
+
 @layer base {
   * {
     border-color: var(--color-border);
@@ -158,11 +300,6 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-  }
-}
-
-@layer base {
-  body {
     font-family: var(--font-body);
     font-weight: 600;
     overflow-x: hidden;
@@ -177,7 +314,7 @@
     letter-spacing: 0.01em;
   }
 
-  /* ---- Branded scrollbars (global) ------------------------------------ */
+  /* Branded scrollbars, mode-aware through --signal / --ink */
   html {
     scrollbar-width: thin;
     scrollbar-color: var(--signal) color-mix(in oklab, var(--ink) 8%, transparent);
@@ -199,9 +336,7 @@
     border: 3px solid transparent;
     background-clip: content-box;
     background-color: color-mix(in oklab, var(--signal) 72%, var(--ink) 10%);
-    transition:
-      background-color 240ms ease,
-      border-width 240ms ease;
+    transition: background-color 240ms ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -215,131 +350,13 @@
   ::-webkit-scrollbar-corner {
     background: transparent;
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-  }
 }
 
-/* Slimmer variant for inner scrollable panels */
-@utility scroll-slim {
-  scrollbar-width: thin;
-  scrollbar-color: color-mix(in oklab, var(--signal) 80%, transparent) transparent;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border-radius: 999px;
-    border: 2px solid transparent;
-    background-clip: content-box;
-    background-color: color-mix(in oklab, var(--signal) 65%, transparent);
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: var(--signal);
-  }
-}
-
-@utility text-outline-ink {
-  -webkit-text-stroke: 3px var(--ink);
-  paint-order: stroke fill;
-}
-
-@utility text-outline-cream {
-  -webkit-text-stroke: 3px var(--cream);
-  paint-order: stroke fill;
-}
-
-@keyframes chompo-marquee {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@keyframes chompo-marquee-reverse {
-  from {
-    transform: translate3d(-50%, 0, 0);
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes chompo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes chompo-blink {
-  0%,
-  49% {
-    opacity: 1;
-  }
-  50%,
-  100% {
-    opacity: 0.25;
-  }
-}
-
-@utility marquee-track {
-  display: flex;
-  width: max-content;
-  animation: chompo-marquee 28s linear infinite;
-}
-
-@utility marquee-track-reverse {
-  display: flex;
-  width: max-content;
-  animation: chompo-marquee-reverse 28s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track,
-  .marquee-track-reverse {
-    animation: none;
-  }
-}
-
-@utility bumps-down {
-  background: radial-gradient(circle 18px at 50% 0, currentColor 99%, transparent 100%) 50% 0 /
-    36px 18px repeat-x;
-}
+/* ---------------- Utilities ---------------- */
 
 @utility bumps-up {
   background: radial-gradient(circle 30px at 50% 100%, currentColor 99%, transparent 100%) 50% 100% /
     56px 30px repeat-x;
-}
-
-
-@utility ticket-edges {
-  mask:
-    conic-gradient(from 135deg at top, transparent, #000 1deg 89deg, transparent 90deg) 50% 0 / 26px
-      13px repeat-x,
-    conic-gradient(from -45deg at bottom, transparent, #000 1deg 89deg, transparent 90deg) 50% 100% /
-      26px 13px repeat-x,
-    linear-gradient(#000, #000) 0 13px / 100% calc(100% - 26px) no-repeat;
-  -webkit-mask:
-    conic-gradient(from 135deg at top, transparent, #000 1deg 89deg, transparent 90deg) 50% 0 / 26px
-      13px repeat-x,
-    conic-gradient(from -45deg at bottom, transparent, #000 1deg 89deg, transparent 90deg) 50% 100% /
-      26px 13px repeat-x,
-    linear-gradient(#000, #000) 0 13px / 100% calc(100% - 26px) no-repeat;
 }
 
 @utility footer-wordmark {
@@ -348,130 +365,13 @@
   letter-spacing: -0.02em;
 }
 
-html[data-theme-transition="on"],
-html[data-theme-transition="on"] *,
-html[data-theme-transition="on"] *::before,
-html[data-theme-transition="on"] *::after {
+/* Scroll-reveal states for the Khida section (needs the .is-in parent switch,
+   so it stays in CSS; every static style lives in the markup). */
+@utility khida-reveal {
+  opacity: 0;
   transition:
-    background-color 620ms cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 620ms cubic-bezier(0.4, 0, 0.2, 1),
-    color 620ms cubic-bezier(0.4, 0, 0.2, 1),
-    fill 620ms cubic-bezier(0.4, 0, 0.2, 1),
-    stroke 620ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 620ms cubic-bezier(0.4, 0, 0.2, 1),
-    outline-color 620ms cubic-bezier(0.4, 0, 0.2, 1),
-    text-decoration-color 620ms cubic-bezier(0.4, 0, 0.2, 1),
-    -webkit-text-stroke-color 620ms cubic-bezier(0.4, 0, 0.2, 1);
-  transition-delay: 0ms;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html[data-theme-transition="on"],
-  html[data-theme-transition="on"] *,
-  html[data-theme-transition="on"] *::before,
-  html[data-theme-transition="on"] *::after {
-    transition: none !important;
-  }
-}
-
-@keyframes toggle-ripple {
-  0% {
-    transform: scale(0.6);
-    opacity: 0.85;
-  }
-  70% {
-    opacity: 0.25;
-  }
-  100% {
-    transform: scale(2.1);
-    opacity: 0;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [style*="toggle-ripple"] {
-    animation: none !important;
-  }
-}
-
-/* --- Smooth theme change: circular reveal via the View Transitions API --- */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-/* Keep the outgoing paint static underneath while the new theme wipes in. */
-::view-transition-old(root) {
-  z-index: 0;
-}
-::view-transition-new(root) {
-  z-index: 1;
-}
-
-html[data-theme-reveal="on"]::view-transition-new(root) {
-  animation: theme-reveal 720ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes theme-reveal {
-  from {
-    clip-path: circle(0% at var(--theme-x, 50%) var(--theme-y, 50%));
-  }
-  to {
-    clip-path: circle(var(--theme-r, 150%) at var(--theme-x, 50%) var(--theme-y, 50%));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html[data-theme-reveal="on"]::view-transition-new(root) {
-    animation: none;
-  }
-}
-
-/* ---------------- Khida / Flavor CTA section ---------------- */
-
-@keyframes khida-float {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-  50% {
-    transform: translate3d(6px, -10px, 0);
-  }
-}
-
-@keyframes khida-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes khida-arrow {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(-5px);
-  }
-}
-
-@keyframes khida-dash {
-  to {
-    background-position: 200% 0;
-  }
-}
-
-.khida-float {
-  animation: khida-float 7s ease-in-out infinite;
-}
-
-.khida-float-slow {
-  animation-duration: 11s;
-  animation-direction: alternate-reverse;
+    opacity 0.7s ease,
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .khida-box {
@@ -496,27 +396,16 @@ html[data-theme-reveal="on"]::view-transition-new(root) {
     transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.khida-box.is-in .khida-line {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
 .khida-straw {
-  transform: rotate(8deg) translate3d(0, -24px, 0);
   opacity: 0;
+  transform: rotate(8deg) translate3d(0, -24px, 0);
   transition:
     opacity 0.5s ease 0.35s,
     transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.35s;
 }
 
 .khida-straw-2 {
-  background-color: transparent;
   transition-delay: 0.45s;
-}
-
-.khida-box.is-in .khida-straw {
-  opacity: 1;
-  transform: rotate(8deg) translate3d(0, 0, 0);
 }
 
 .khida-card {
@@ -525,11 +414,6 @@ html[data-theme-reveal="on"]::view-transition-new(root) {
   transition:
     opacity 0.6s ease 0.3s,
     transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
-}
-
-.khida-box.is-in .khida-card {
-  opacity: 1;
-  transform: translate3d(0, 0, 0) rotate(0deg);
 }
 
 .khida-dashed {
@@ -541,25 +425,82 @@ html[data-theme-reveal="on"]::view-transition-new(root) {
     background-color 0.25s ease;
 }
 
+.khida-box.is-in .khida-line,
 .khida-box.is-in .khida-dashed {
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
 
-.khida-spin {
-  animation: khida-spin 5s linear infinite;
+.khida-box.is-in .khida-straw {
+  opacity: 1;
+  transform: rotate(8deg) translate3d(0, 0, 0);
 }
 
-.khida-arrow {
-  animation: khida-arrow 1.4s ease-in-out infinite;
+.khida-box.is-in .khida-card {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotate(0deg);
 }
+
+/* ---------------- Theme switching ---------------- */
+
+html[data-theme-transition="on"],
+html[data-theme-transition="on"] *,
+html[data-theme-transition="on"] *::before,
+html[data-theme-transition="on"] *::after {
+  transition:
+    background-color 620ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 620ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 620ms cubic-bezier(0.4, 0, 0.2, 1),
+    fill 620ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 620ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 620ms cubic-bezier(0.4, 0, 0.2, 1),
+    outline-color 620ms cubic-bezier(0.4, 0, 0.2, 1),
+    text-decoration-color 620ms cubic-bezier(0.4, 0, 0.2, 1),
+    -webkit-text-stroke-color 620ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0ms;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 0;
+}
+
+::view-transition-new(root) {
+  z-index: 1;
+}
+
+html[data-theme-reveal="on"]::view-transition-new(root) {
+  animation: theme-reveal 720ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ---------------- Reduced motion ---------------- */
 
 @media (prefers-reduced-motion: reduce) {
-  .khida-float,
-  .khida-spin,
-  .khida-arrow {
+  html {
+    scroll-behavior: auto;
+  }
+
+  html[data-theme-transition="on"],
+  html[data-theme-transition="on"] *,
+  html[data-theme-transition="on"] *::before,
+  html[data-theme-transition="on"] *::after {
+    transition: none !important;
+  }
+
+  html[data-theme-reveal="on"]::view-transition-new(root) {
     animation: none;
   }
+
+  [style*="toggle-ripple"],
+  [class*="animate-"] {
+    animation: none !important;
+  }
+
   .khida-box,
   .khida-line,
   .khida-straw,
@@ -569,6 +510,8 @@ html[data-theme-reveal="on"]::view-transition-new(root) {
     transition: none;
     transform: none;
   }
+
+  .khida-box.is-in .khida-straw,
   .khida-straw {
     transform: rotate(8deg);
   }
