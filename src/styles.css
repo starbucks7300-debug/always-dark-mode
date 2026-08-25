@@ -365,15 +365,8 @@
   letter-spacing: -0.02em;
 }
 
-/* Scroll-reveal states for the Khida section (needs the .is-in parent switch,
-   so it stays in CSS; every static style lives in the markup). */
-@utility khida-reveal {
-  opacity: 0;
-  transition:
-    opacity 0.7s ease,
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
+/* Scroll-reveal states for the Khida section (need the .is-in parent switch,
+   so they stay in CSS; all static styling lives in the markup). */
 .khida-box {
   clip-path: polygon(0 0, 100% 0, 100% 88%, 50% 100%, 0 88%);
   opacity: 0;

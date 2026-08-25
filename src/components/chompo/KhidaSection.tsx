@@ -51,10 +51,10 @@ export function KhidaSection() {
     <section className="relative w-full overflow-hidden bg-cream">
       {/* floating doodle clouds */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-56 text-ink" aria-hidden="true">
-        <Cloud className="khida-float absolute top-6 left-[4%] w-24 opacity-80 sm:w-32" />
-        <Cloud className="khida-float khida-float-slow absolute top-20 left-[16%] w-16 opacity-60 sm:w-20" />
-        <Cloud className="khida-float khida-float-slow absolute top-4 right-[6%] w-24 opacity-80 sm:w-32" />
-        <Cloud className="khida-float absolute top-24 right-[20%] w-16 opacity-60 sm:w-20" />
+        <Cloud className="animate-float absolute top-6 left-[4%] w-24 opacity-80 sm:w-32" />
+        <Cloud className="animate-float-slow absolute top-20 left-[16%] w-16 opacity-60 sm:w-20" />
+        <Cloud className="animate-float-slow absolute top-4 right-[6%] w-24 opacity-80 sm:w-32" />
+        <Cloud className="animate-float absolute top-24 right-[20%] w-16 opacity-60 sm:w-20" />
       </div>
 
       {/* Top label area */}
@@ -127,7 +127,7 @@ export function KhidaSection() {
                 <br />
                 NOW
               </p>
-              <span className="khida-arrow inline-block text-[13px] text-signal">←</span>
+              <span className="animate-nudge-left inline-block text-[13px] text-signal">←</span>
             </button>
 
             {/* App store buttons */}
@@ -161,7 +161,7 @@ export function KhidaSection() {
               type="button"
               className="khida-dashed inline-flex items-center gap-2 rounded-[30px] border-2 border-dashed border-cream/55 bg-transparent px-7 py-[11px] font-display text-[clamp(10px,1.3vw,13px)] tracking-[0.22em] text-cream transition-colors hover:bg-cream/10"
             >
-              <span className="khida-spin inline-block">★</span> CHOMPO CALL
+              <span className="animate-[spin_5s_linear_infinite] inline-block">★</span> CHOMPO CALL
             </button>
           </div>
         </div>
