@@ -21,7 +21,7 @@ export function TypeSpiral() {
             key={ring.radius}
             className="absolute inset-0"
             style={{
-              animation: `chompo-spin ${ring.duration}s linear infinite ${
+              animation: `spin ${ring.duration}s linear infinite ${
                 ringIndex % 2 ? "reverse" : "normal"
               }`,
             }}
