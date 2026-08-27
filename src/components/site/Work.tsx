@@ -184,23 +184,52 @@ export function Work() {
           </div>
         </div>
 
-        {/* Progress dots */}
-        <div className="shell mt-8 flex justify-center gap-2.5">
-          {projects.map((p, i) => (
-            <button
-              key={p.title}
-              type="button"
-              aria-label={`Go to project ${i + 1}`}
-              onClick={() => scrollTo(i)}
-              className={`h-1.5 rounded-full transition-all duration-500 ${
-                i === active
-                  ? "w-10 bg-foreground"
-                  : "w-3 bg-foreground/20 hover:bg-foreground/40"
-              }`}
-            />
-          ))}
+        {/* Progress dots (left) + view-all action (right) */}
+        <div className="shell mt-8 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-2.5">
+            {projects.map((p, i) => (
+              <button
+                key={p.title}
+                type="button"
+                aria-label={`Go to project ${i + 1}`}
+                onClick={() => scrollTo(i)}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === active
+                    ? "w-10 bg-foreground"
+                    : "w-3 bg-foreground/20 hover:bg-foreground/40"
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setShowAll(true)}
+            className="group inline-flex items-center gap-2.5 rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:border-foreground/30 hover:shadow-lg"
+          >
+            View all projects
+            <span className="text-muted-foreground tabular-nums transition-colors group-hover:text-foreground">
+              {allProjects.length}
+            </span>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="transition-transform duration-300 group-hover:translate-x-0.5"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </button>
         </div>
       </div>
+
+      <AllProjectsModal open={showAll} onClose={() => setShowAll(false)} />
     </section>
   );
-}
+
