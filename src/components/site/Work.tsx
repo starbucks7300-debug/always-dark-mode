@@ -1,40 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Reveal } from "./Reveal";
-import work1 from "@/assets/work-1.jpg";
-import work2 from "@/assets/work-2.jpg";
-import work3 from "@/assets/work-3.jpg";
-import work4 from "@/assets/work-4.jpg";
+import { AllProjectsModal } from "./AllProjectsModal";
+import { featuredProjects, projects as allProjects } from "@/data/projects";
 
-const projects = [
-  {
-    title: "E-Commerce Marketplace Engine",
-    image: work1,
-    description:
-      "Modular marketplace backend using .NET 8 microservices and the repository pattern. A high-maintainability foundation ideal for multi-vendor booking marketplaces.",
-    tags: [".NET 8", "Microservices", "Repository Pattern", "SQL Server"],
-  },
-  {
-    title: "Real-Time Logistics & IoT Dashboard",
-    image: work2,
-    description:
-      "Full-stack dashboard with SignalR real-time visualization. The architecture transfers directly to live availability, booking status, and concurrent reservation flows.",
-    tags: ["Angular", ".NET Core", "SignalR", "Redis"],
-  },
-  {
-    title: "Multi-Tenant CRM/ERP Sync Platform",
-    image: work3,
-    description:
-      "Secure data isolation and hierarchical RBAC across large-scale multi-tenant environments — the core pattern required by modern SaaS booking platforms.",
-    tags: ["Multi-Tenant", "RBAC", "OAuth 2.0", "PostgreSQL"],
-  },
-  {
-    title: "Next.js Portfolio & PWA",
-    image: work4,
-    description:
-      "High-performance frontend with optimized web vitals, demonstrating modern, polished product interfaces built for speed and clarity.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "PWA"],
-  },
-];
+const projects = featuredProjects;
+
 
 export function Work() {
   const sectionRef = useRef<HTMLElement>(null);
