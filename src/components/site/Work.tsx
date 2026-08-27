@@ -232,4 +232,6 @@ export function Work() {
       <AllProjectsModal open={showAll} onClose={() => setShowAll(false)} />
     </section>
   );
+}
+
 
