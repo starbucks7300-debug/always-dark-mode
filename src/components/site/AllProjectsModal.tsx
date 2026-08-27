@@ -201,49 +201,6 @@ export function AllProjectsModal({ open, onClose }: { open: boolean; onClose: ()
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2">
-                {(["All", ...projectCategories] as const).map((c) => {
-                  const activeChip = category === c;
-                  return (
-                    <button
-                      key={c}
-                      type="button"
-                      onClick={() => setCategory(c)}
-                      className={`relative rounded-full border px-4 py-1.5 text-xs tracking-wide transition-colors duration-300 ${
-                        activeChip
-                          ? "border-transparent text-primary-foreground"
-                          : "border-border text-muted-foreground hover:border-foreground/25 hover:text-foreground"
-                      }`}
-                    >
-                      {activeChip && (
-                        <motion.span
-                          layoutId="category-pill"
-                          className="absolute inset-0 rounded-full bg-primary"
-                          transition={{ duration: 0.35, ease: EASE }}
-                        />
-                      )}
-                      <span className="relative">
-                        {c}
-                        <span className="ml-1.5 opacity-60">{counts.get(c) ?? 0}</span>
-                      </span>
-                    </button>
-                  );
-                })}
-
-                {hasFilters && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setQuery("");
-                      setCategory("All");
-                      setSort("newest");
-                    }}
-                    className="ml-auto text-xs tracking-wide text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
-                  >
-                    Reset filters
-                  </button>
-                )}
-              </div>
             </div>
 
             {/* Results */}
