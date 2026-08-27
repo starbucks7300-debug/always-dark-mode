@@ -98,28 +98,6 @@ export function AllProjectsModal({ open, onClose }: { open: boolean; onClose: ()
             exit={{ opacity: 0, y: 18, scale: 0.98 }}
             transition={{ duration: 0.45, ease: EASE }}
           >
-            {/* Header */}
-            <div className="flex items-start justify-between gap-6 border-b border-border p-6 lg:p-8">
-              <div>
-                <p className="eyebrow">Archive</p>
-                <h2 className="display mt-2 text-3xl lg:text-4xl">All projects</h2>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  {filtered.length} {filtered.length === 1 ? "project" : "projects"}
-                  {totalPages > 1 && ` · page ${current} of ${totalPages}`}
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={onClose}
-                aria-label="Close all projects"
-                className="grid size-11 shrink-0 place-items-center rounded-2xl border border-border transition-all duration-300 hover:rotate-90 hover:border-foreground/30"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                  <path d="M18 6 6 18" /><path d="m6 6 12 12" />
-                </svg>
-              </button>
-            </div>
-
             {/* Toolbar */}
             <div className="space-y-4 border-b border-border p-6 lg:px-8">
               <div className="flex flex-col gap-3 sm:flex-row">
@@ -138,18 +116,76 @@ export function AllProjectsModal({ open, onClose }: { open: boolean; onClose: ()
                     className="h-12 w-full rounded-2xl border border-border bg-background/60 pl-11 pr-4 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-foreground/30"
                   />
                 </div>
-                <select
-                  value={sort}
-                  onChange={(e) => setSort(e.target.value as SortKey)}
-                  aria-label="Sort projects"
-                  className="h-12 rounded-2xl border border-border bg-background/60 px-4 text-sm outline-none transition-colors focus:border-foreground/30"
+                <button
+                  type="button"
+                  onClick={onClose}
+                  aria-label="Close all projects"
+                  className="grid size-12 shrink-0 place-items-center rounded-2xl border border-border transition-all duration-300 hover:rotate-90 hover:border-foreground/30"
                 >
-                  {SORTS.map((s) => (
-                    <option key={s.key} value={s.key} className="bg-card">
-                      {s.label}
-                    </option>
-                  ))}
-                </select>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M18 6 6 18" /><path d="m6 6 12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div className="flex flex-wrap items-center gap-2">
+                  {(["All", ...projectCategories] as const).map((c) => {
+                    const activeChip = category === c;
+                    return (
+                      <button
+                        key={c}
+                        type="button"
+                        onClick={() => setCategory(c)}
+                        className={`relative rounded-full border px-4 py-1.5 text-xs tracking-wide transition-colors duration-300 ${
+                          activeChip
+                            ? "border-transparent text-primary-foreground"
+                            : "border-border text-muted-foreground hover:border-foreground/25 hover:text-foreground"
+                        }`}
+                      >
+                        {activeChip && (
+                          <motion.span
+                            layoutId="category-pill"
+                            className="absolute inset-0 rounded-full bg-primary"
+                            transition={{ duration: 0.35, ease: EASE }}
+                          />
+                        )}
+                        <span className="relative">
+                          {c}
+                          <span className="ml-1.5 opacity-60">{counts.get(c) ?? 0}</span>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-xs tracking-wide text-muted-foreground">Sort</span>
+                  {SORTS.map((s) => {
+                    const activeSort = sort === s.key;
+                    return (
+                      <button
+                        key={s.key}
+                        type="button"
+                        onClick={() => setSort(s.key)}
+                        className={`relative rounded-full border px-3 py-1.5 text-xs tracking-wide transition-colors duration-300 ${
+                          activeSort
+                            ? "border-transparent text-primary-foreground"
+                            : "border-border text-muted-foreground hover:border-foreground/25 hover:text-foreground"
+                        }`}
+                      >
+                        {activeSort && (
+                          <motion.span
+                            layoutId="sort-pill"
+                            className="absolute inset-0 rounded-full bg-primary"
+                            transition={{ duration: 0.35, ease: EASE }}
+                          />
+                        )}
+                        <span className="relative">{s.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
