@@ -1,46 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { Reveal } from "./Reveal";
-import work1 from "@/assets/work-1.jpg";
-import work2 from "@/assets/work-2.jpg";
-import work3 from "@/assets/work-3.jpg";
-import work4 from "@/assets/work-4.jpg";
+import { AllProjectsModal } from "./AllProjectsModal";
+import { featuredProjects, projects as allProjects } from "@/data/projects";
 
-const projects = [
-  {
-    title: "E-Commerce Marketplace Engine",
-    image: work1,
-    description:
-      "Modular marketplace backend using .NET 8 microservices and the repository pattern. A high-maintainability foundation ideal for multi-vendor booking marketplaces.",
-    tags: [".NET 8", "Microservices", "Repository Pattern", "SQL Server"],
-  },
-  {
-    title: "Real-Time Logistics & IoT Dashboard",
-    image: work2,
-    description:
-      "Full-stack dashboard with SignalR real-time visualization. The architecture transfers directly to live availability, booking status, and concurrent reservation flows.",
-    tags: ["Angular", ".NET Core", "SignalR", "Redis"],
-  },
-  {
-    title: "Multi-Tenant CRM/ERP Sync Platform",
-    image: work3,
-    description:
-      "Secure data isolation and hierarchical RBAC across large-scale multi-tenant environments — the core pattern required by modern SaaS booking platforms.",
-    tags: ["Multi-Tenant", "RBAC", "OAuth 2.0", "PostgreSQL"],
-  },
-  {
-    title: "Next.js Portfolio & PWA",
-    image: work4,
-    description:
-      "High-performance frontend with optimized web vitals, demonstrating modern, polished product interfaces built for speed and clarity.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "PWA"],
-  },
-];
+const projects = featuredProjects;
+
 
 export function Work() {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [active, setActive] = useState(0);
+  const [showAll, setShowAll] = useState(false);
   const activeRef = useRef(0);
 
   // Continuous rAF loop: eased (lerped) horizontal motion driven by page scroll.
@@ -214,23 +185,54 @@ export function Work() {
           </div>
         </div>
 
-        {/* Progress dots */}
-        <div className="shell mt-8 flex justify-center gap-2.5">
-          {projects.map((p, i) => (
-            <button
-              key={p.title}
-              type="button"
-              aria-label={`Go to project ${i + 1}`}
-              onClick={() => scrollTo(i)}
-              className={`h-1.5 rounded-full transition-all duration-500 ${
-                i === active
-                  ? "w-10 bg-foreground"
-                  : "w-3 bg-foreground/20 hover:bg-foreground/40"
-              }`}
-            />
-          ))}
+        {/* Progress dots (left) + view-all action (right) */}
+        <div className="shell mt-8 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-2.5">
+            {projects.map((p, i) => (
+              <button
+                key={p.title}
+                type="button"
+                aria-label={`Go to project ${i + 1}`}
+                onClick={() => scrollTo(i)}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === active
+                    ? "w-10 bg-foreground"
+                    : "w-3 bg-foreground/20 hover:bg-foreground/40"
+                }`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setShowAll(true)}
+            className="group inline-flex items-center gap-2.5 rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:border-foreground/30 hover:shadow-lg"
+          >
+            View all projects
+            <span className="text-muted-foreground tabular-nums transition-colors group-hover:text-foreground">
+              {allProjects.length}
+            </span>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="transition-transform duration-300 group-hover:translate-x-0.5"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </button>
         </div>
       </div>
+
+      <AllProjectsModal open={showAll} onClose={() => setShowAll(false)} />
     </section>
   );
 }
+
+
