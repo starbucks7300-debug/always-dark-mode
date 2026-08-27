@@ -11,6 +11,7 @@ export function Work() {
   const trackRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [active, setActive] = useState(0);
+  const [showAll, setShowAll] = useState(false);
   const activeRef = useRef(0);
 
   // Continuous rAF loop: eased (lerped) horizontal motion driven by page scroll.
