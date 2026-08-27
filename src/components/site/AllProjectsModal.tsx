@@ -185,6 +185,19 @@ export function AllProjectsModal({ open, onClose }: { open: boolean; onClose: ()
                       </button>
                     );
                   })}
+                  {hasFilters && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setQuery("");
+                        setCategory("All");
+                        setSort("newest");
+                      }}
+                      className="ml-2 text-xs tracking-wide text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                    >
+                      Reset
+                    </button>
+                  )}
                 </div>
               </div>
 
